@@ -9,7 +9,6 @@
         "傑克",
         "火妮"
       ],
-      "license": "© 2025 Yimi Jian. All rights reserved.",
       "description": "傑克與火妮\n",
       "files": {
         "web": {
@@ -21,10 +20,18 @@
           "name": "傑克和火妮-1920.thumb.webp",
           "size": 37370,
           "sha256": "a7509680da03135a03ba3ff8d47ec10263fedc0b352d89707dc71b1023aa6aaa"
+        },
+        "export": {
+          "name": "傑克和火妮-1920.png",
+          "size": 4136394,
+          "sha256": "f917b9fac31d3223f30994d4297573007886f6a7bf4aeb050a14ed58c9fc72d9"
         }
-      },
-      "proof_zip": "傑克和火妮-1920_proof.zip"
+      }
     }
   ],
-  "updated_at_utc": "2025-11-21T18:46:33.353333+00:00"
+  "updated_at_utc": "2025-11-21T18:46:33.353333+00:00",
+  "site": {
+    "generated_at_utc": "2025-11-21T19:47:34.584614+00:00",
+    "version": 1
+  }
 }
