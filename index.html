@@ -1,42 +1,302 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>作品集 | 我的創作</title>
-<style>
-body { font-family: sans-serif; background:#111; color:#eee; margin:0; padding:2em; }
-.gallery { display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:2em; }
-.card { background:#222; border-radius:1em; overflow:hidden; box-shadow:0 0 10px #000; }
-.card img { width:100%; display:block; }
-.card h3 { margin:0.5em 1em; }
-.card p { margin:0 1em 1em; color:#ccc; }
-.card a { display:inline-block; margin:0 1em 1em; color:#6cf; text-decoration:none; }
-</style>
-</head>
-<body>
-<h1>作品集</h1>
-<div class="gallery" id="gallery"></div>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title><?= siteInfo.title || '作品畫廊' ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<script>
-async function loadGallery() {
-  const res = await fetch('manifest.json');
-  const data = await res.json();
-  const gallery = document.getElementById('gallery');
-  data.artworks.forEach(a => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <img src="${a.files.web.name}" alt="${a.title}">
-      <h3>${a.title}</h3>
-      <p>${a.description_html || ''}</p>
-      <p><small>${a.date}</small></p>
-      <a href="proofs/${a.slug}_proof.zip">下載驗證包</a>
-    `;
-    gallery.appendChild(card);
-  });
-}
-loadGallery();
-</script>
-</body>
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: #111;
+        color: #eee;
+      }
+
+      header {
+        padding: 1.5rem 2rem 0.5rem;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 1.6rem;
+      }
+
+      header p {
+        margin: 0.3rem 0 0;
+        font-size: 0.9rem;
+        color: #aaa;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+        padding: 1rem 2rem 2rem;
+        box-sizing: border-box;
+      }
+
+      .card {
+        background: #181818;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.18s ease, box-shadow 0.18s ease,
+          background 0.18s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+        background: #202020;
+      }
+
+      .thumb-wrap {
+        position: relative;
+        padding-top: 70%;
+        overflow: hidden;
+      }
+
+      .thumb-wrap img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .card-body {
+        padding: 0.75rem 0.9rem 0.9rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .title-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        align-items: baseline;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .card-date {
+        font-size: 0.75rem;
+        color: #bbb;
+        white-space: nowrap;
+      }
+
+      .card-desc {
+        font-size: 0.8rem;
+        color: #ccc;
+        max-height: 3.2em;
+        overflow: hidden;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        margin-top: 0.2rem;
+      }
+
+      .tag {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+        border-radius: 999px;
+        border: 1px solid #444;
+        color: #ccc;
+      }
+
+      .meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.7rem;
+        color: #777;
+        margin-top: 0.3rem;
+      }
+
+      .meta-row a {
+        color: #8ab4ff;
+        text-decoration: none;
+      }
+
+      .meta-row a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 600px) {
+        header {
+          padding: 1rem 1rem 0.5rem;
+        }
+        .gallery {
+          padding: 0.5rem 1rem 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1><?= siteInfo.title || '作品畫廊' ?></h1>
+      <p>
+        <?= siteInfo.subtitle || '這裡會自動從 GitHub 的 manifest.json 讀取最新的作品列表。' ?>
+      </p>
+    </header>
+
+    <main class="gallery" id="gallery"></main>
+
+    <script>
+      // 後端從 Code.gs 傳下來的資料
+      const artworks = <?= JSON.stringify(artworks) ?>;
+      const imageBaseUrl = <?= JSON.stringify(imageBaseUrl) ?>;
+
+      function buildImageUrl(fileName) {
+        // GitHub raw URL 需要對檔名做 encodeURIComponent，
+        // 尤其你的檔名有中文。
+        return imageBaseUrl + encodeURIComponent(fileName);
+      }
+
+      function formatDate(dateStr) {
+        if (!dateStr) return "";
+        // dateStr 可能是 "YYYY-MM-DD" 或 ISO
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return dateStr; // 解析失敗就原樣顯示
+
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${y}-${m}-${day}`;
+      }
+
+      function escapeHtml(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function renderGallery() {
+        const container = document.getElementById("gallery");
+        container.innerHTML = "";
+
+        if (!artworks || artworks.length === 0) {
+          container.innerHTML =
+            "<p>目前沒有作品，或 manifest.json 中 artworks 為空。</p>";
+          return;
+        }
+
+        artworks
+          // 可選：按 date 排序（最新在前）
+          .slice()
+          .sort((a, b) => {
+            const ad = new Date(a.date || 0).getTime();
+            const bd = new Date(b.date || 0).getTime();
+            return bd - ad;
+          })
+          .forEach((art) => {
+            const files = art.files || {};
+            const web = files.web || null;
+            const thumb = files.thumb || web || null;
+
+            const imgFile = thumb || web; // 沒縮圖就用 web 當封面
+            const imgUrl = imgFile ? buildImageUrl(imgFile.name) : "";
+
+            const tags = Array.isArray(art.tags) ? art.tags : [];
+
+            const card = document.createElement("article");
+            card.className = "card";
+
+            // 圖片區
+            const thumbWrap = document.createElement("div");
+            thumbWrap.className = "thumb-wrap";
+            if (imgUrl) {
+              const img = document.createElement("img");
+              img.src = imgUrl;
+              img.alt = art.title || art.slug || "";
+              thumbWrap.appendChild(img);
+            } else {
+              // 沒圖的 fallback
+              thumbWrap.innerHTML =
+                '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#555;font-size:0.9rem;">無預覽</div>';
+            }
+
+            // 文字區
+            const body = document.createElement("div");
+            body.className = "card-body";
+
+            const titleRow = document.createElement("div");
+            titleRow.className = "title-row";
+
+            const titleEl = document.createElement("div");
+            titleEl.className = "card-title";
+            titleEl.textContent = art.title || art.slug || "(未命名作品)";
+
+            const dateEl = document.createElement("div");
+            dateEl.className = "card-date";
+            dateEl.textContent = formatDate(art.date);
+
+            titleRow.appendChild(titleEl);
+            titleRow.appendChild(dateEl);
+
+            const descEl = document.createElement("div");
+            descEl.className = "card-desc";
+            if (art.description) {
+              descEl.textContent = art.description;
+            }
+
+            const tagsWrap = document.createElement("div");
+            tagsWrap.className = "tags";
+            tags.forEach((t) => {
+              const tagEl = document.createElement("span");
+              tagEl.className = "tag";
+              tagEl.textContent = "#" + t;
+              tagsWrap.appendChild(tagEl);
+            });
+
+            const metaRow = document.createElement("div");
+            metaRow.className = "meta-row";
+
+            const slugSpan = document.createElement("span");
+            slugSpan.textContent = art.slug || "";
+
+            const viewLink = document.createElement("a");
+            viewLink.target = "_blank";
+            if (files.web) {
+              viewLink.href = buildImageUrl(files.web.name);
+              viewLink.textContent = "開啟完整圖片";
+            } else {
+              viewLink.href = "#";
+              viewLink.textContent = "";
+            }
+
+            metaRow.appendChild(slugSpan);
+            if (files.web) {
+              metaRow.appendChild(viewLink);
+            }
+
+            body.appendChild(titleRow);
+            if (art.description) body.appendChild(descEl);
+            if (tags.length > 0) body.appendChild(tagsWrap);
+            body.appendChild(metaRow);
+
+            card.appendChild(thumbWrap);
+            card.appendChild(body);
+
+            container.appendChild(card);
+          });
+      }
+
+      renderGallery();
+    </script>
+  </body>
 </html>
