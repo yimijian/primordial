@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作品集 | 我的創作</title>
+<style>
+body { font-family: sans-serif; background:#111; color:#eee; margin:0; padding:2em; }
+.gallery { display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:2em; }
+.card { background:#222; border-radius:1em; overflow:hidden; box-shadow:0 0 10px #000; }
+.card img { width:100%; display:block; }
+.card h3 { margin:0.5em 1em; }
+.card p { margin:0 1em 1em; color:#ccc; }
+.card a { display:inline-block; margin:0 1em 1em; color:#6cf; text-decoration:none; }
+</style>
+</head>
+<body>
+<h1>作品集</h1>
+<div class="gallery" id="gallery"></div>
+
+<script>
+async function loadGallery() {
+  const res = await fetch('manifest.json');
+  const data = await res.json();
+  const gallery = document.getElementById('gallery');
+  data.artworks.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${a.files.web.name}" alt="${a.title}">
+      <h3>${a.title}</h3>
+      <p>${a.description_html || ''}</p>
+      <p><small>${a.date}</small></p>
+      <a href="proofs/${a.slug}_proof.zip">下載驗證包</a>
+    `;
+    gallery.appendChild(card);
+  });
+}
+loadGallery();
+</script>
+</body>
+</html>

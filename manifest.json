@@ -1,0 +1,30 @@
+{
+  "artworks": [
+    {
+      "slug": "傑克和火妮-1920",
+      "title": "bliss",
+      "date": "2025-01-08",
+      "tags": [
+        "原創",
+        "傑克",
+        "火妮"
+      ],
+      "license": "© 2025 Yimi Jian. All rights reserved.",
+      "description": "傑克與火妮\n",
+      "files": {
+        "web": {
+          "name": "傑克和火妮-1920.web.webp",
+          "size": 33744,
+          "sha256": "19f74f3290db1758d078ce9a9a27e4fe20539bee0d7a0622f5d85ec350082622"
+        },
+        "thumb": {
+          "name": "傑克和火妮-1920.thumb.webp",
+          "size": 37370,
+          "sha256": "a7509680da03135a03ba3ff8d47ec10263fedc0b352d89707dc71b1023aa6aaa"
+        }
+      },
+      "proof_zip": "傑克和火妮-1920_proof.zip"
+    }
+  ],
+  "updated_at_utc": "2025-11-21T18:26:01.906382+00:00"
+}
