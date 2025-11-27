@@ -1,0 +1,436 @@
+{
+  "artworks": [
+    {
+      "slug": "傑克和火妮-1920",
+      "title": "bliss",
+      "date": "2025-01-08",
+      "tags": [
+        "原創",
+        "傑克",
+        "火妮",
+        "心臟"
+      ],
+      "description": "傑克與火妮\n",
+      "files": {
+        "web": {
+          "name": "傑克和火妮-1920.web.webp",
+          "size": 33744,
+          "sha256": "19f74f3290db1758d078ce9a9a27e4fe20539bee0d7a0622f5d85ec350082622"
+        },
+        "thumb": {
+          "name": "傑克和火妮-1920.thumb.webp",
+          "size": 37370,
+          "sha256": "a7509680da03135a03ba3ff8d47ec10263fedc0b352d89707dc71b1023aa6aaa"
+        }
+      }
+    },
+    {
+      "slug": "快樂公司_第2話",
+      "title": "快樂公司_第2話",
+      "date": "2022-12-31",
+      "tags": [
+        "原創",
+        "漫畫",
+        "快樂公司"
+      ],
+      "description": "用愛發電\n",
+      "files": {
+        "web": {
+          "name": "快樂公司_第2話_page_00.web.webp",
+          "size": 62662,
+          "sha256": "55de53f6cfa85cc24b050cca6ae07e6853c75c19c9266e9cb606e0669edbc125"
+        },
+        "thumb": {
+          "name": "快樂公司_第2話_page_00.thumb.webp",
+          "size": 18826,
+          "sha256": "7e003b7de7b4344c2c05f87402b43e8b4aeb2f6f8caea66a6bf248560f5f87cf"
+        }
+      },
+      "pages": [
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_00.web.webp",
+            "size": 62662,
+            "sha256": "55de53f6cfa85cc24b050cca6ae07e6853c75c19c9266e9cb606e0669edbc125"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_00.thumb.webp",
+            "size": 18826,
+            "sha256": "7e003b7de7b4344c2c05f87402b43e8b4aeb2f6f8caea66a6bf248560f5f87cf"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_01.web.webp",
+            "size": 193938,
+            "sha256": "6245fa94d8abc461f0fdc4179fdeaa7f12239f4301176257c79b9d3c199e4866"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_01.thumb.webp",
+            "size": 47016,
+            "sha256": "70ca907d64b382497319f17851074ed09c895a6d32e25dd4a94eb122c9ca9811"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_02.web.webp",
+            "size": 136100,
+            "sha256": "a5f1af0c168ae81e8616a2a8c2e7c976ce750dbeb36c42e93c1fd57e771a138c"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_02.thumb.webp",
+            "size": 39396,
+            "sha256": "a60a310af419153e13f45ca4f1884b4283b125ed863872d71b5b412dc2bb0510"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_03.web.webp",
+            "size": 169012,
+            "sha256": "07f727f821306268677f57013cc93d92d3fc1aa6f11fe1582e2a52860cca02cd"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_03.thumb.webp",
+            "size": 46684,
+            "sha256": "459e9bc2c2ea9c1e13954c57470c37675d3fa2e62e23a2778016c2473ce13c87"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_04.web.webp",
+            "size": 133188,
+            "sha256": "c532f978d178567fc37973dfc93b39de08ca645d1724ad1110311b57c26a7a27"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_04.thumb.webp",
+            "size": 41134,
+            "sha256": "1c82a7765e2325650e04ecad0a3bb1f24d4c2331b73fbdc5e8e2fe8005b0df4b"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_05.web.webp",
+            "size": 149664,
+            "sha256": "72fa27d0d9e4fb77ec16a0d5598efce367529474690835fd983f29f2d506e407"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_05.thumb.webp",
+            "size": 43694,
+            "sha256": "40ef23c0a6acb00010c30d66f6a44e383d4ae6174e12d35103177ce83e6ef970"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_06.web.webp",
+            "size": 118786,
+            "sha256": "a1d8c528f2279870f2c7e1097fb9b2f152bcb395b1da5ef1edad1650852e33eb"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_06.thumb.webp",
+            "size": 36926,
+            "sha256": "b8dff730e61fb7524a7b559e65c253c3c9d7ed08d9efc48df12ee2b3178a9cd1"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_07.web.webp",
+            "size": 124628,
+            "sha256": "eb9cd79e1d2304bbf0dda2d909121d5ac917f4ddfeaf9f22e5559b61d651d46b"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_07.thumb.webp",
+            "size": 36610,
+            "sha256": "3a9f639e6f4d6406aba768a7c3a6e10bb8c7d0667233d1216819e8ca1e2f332f"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_08.web.webp",
+            "size": 124796,
+            "sha256": "628a08f2bbdd183c1be39e5e7347dad18c3d407e2797986aaacc7fd9b1f13076"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_08.thumb.webp",
+            "size": 35218,
+            "sha256": "e15ce7a82309fea1fd2fcab8aebee72e195a70fb644b026a7fef5fbdd3db5a40"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_09.web.webp",
+            "size": 133500,
+            "sha256": "8d17c6209363e21981d681052a0166ec6093923fde531ea5c13a3fdeb8991908"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_09.thumb.webp",
+            "size": 41976,
+            "sha256": "3d887e95eeb5662312a0184e3f432a50bc837fc10f3d5514867662a4ae103068"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_10.web.webp",
+            "size": 164296,
+            "sha256": "b8b1f974587d273ac902bbc70781c499701bca8268fd1c85d9e0c61686024ad3"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_10.thumb.webp",
+            "size": 47096,
+            "sha256": "4bd583b9c58239ce21a6742eb0521f3273637efaee3cafbcd7c8e20fe6ecd879"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_11.web.webp",
+            "size": 218526,
+            "sha256": "d21d674a629b0d6385f18268d4fc3bdef8b2cb5b736c5b3a49aef95f3062688c"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_11.thumb.webp",
+            "size": 59804,
+            "sha256": "675edb0e99a8a9f63a3b0e35563b5c627e4381df519dc8c91c453536adfd0cdd"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_12.web.webp",
+            "size": 157988,
+            "sha256": "ee95493896a899b28664e40a5074ad6bd7bfe5b10d22331fa29f402244cc6653"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_12.thumb.webp",
+            "size": 44940,
+            "sha256": "a70034a01b8fa72f9aed7a00ce73e6f823e3d8e877dab19c7c0bab5d2ce53c33"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_13.web.webp",
+            "size": 157108,
+            "sha256": "acb8e0707197ab3b4be6ab146eaf5872f8d6f9303ce03d9fa0787c7df1ce03e9"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_13.thumb.webp",
+            "size": 48460,
+            "sha256": "4c202bc0293dd1a8d69172f9d5c7af3e205e85a620df98ebf5e19ec76e106bb1"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_14.web.webp",
+            "size": 163722,
+            "sha256": "4998c73fb8691aa88b6a2b491c6e1655ce21ea40f0e3789c68390aa2524e9922"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_14.thumb.webp",
+            "size": 48124,
+            "sha256": "649f6bc709fc3913b1444b5eb4f59e2d58e44172da244cb494592294d0858899"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_15.web.webp",
+            "size": 152836,
+            "sha256": "30ca25a82361637545fe111ec42cd5faa02efb33ff6a247acb0f69ed91fa8532"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_15.thumb.webp",
+            "size": 44976,
+            "sha256": "ceffe276762485d3a89eb3ca59a22516b138ec7208c3173f4aed870cced2be9c"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_16.web.webp",
+            "size": 138524,
+            "sha256": "51c6688055caf41c78da38f38462ea861e80da68091ce4fb35a05cc44debcbba"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_16.thumb.webp",
+            "size": 41460,
+            "sha256": "4054fb7f3bd95d78c349a48b931cea01d8ed7fb56067f459e5df2766c88d0216"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_17.web.webp",
+            "size": 148354,
+            "sha256": "5349567f05f10ceee64100db4a9e4dde4ef0254fd554518ba54bf75532457746"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_17.thumb.webp",
+            "size": 44894,
+            "sha256": "7fba0e01417870f36ef0e823c38db77adfae9781235b7f463e00236aff0cda2d"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_18.web.webp",
+            "size": 205520,
+            "sha256": "2cad684e172cb8df3d00eb2a18b9ebc0f81865f30eefcdde84a2e0a581414b91"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_18.thumb.webp",
+            "size": 55034,
+            "sha256": "a9258ffbd9abd4a8a82b9b985e6c6d2c3c7efb94c27f8c35bc1cb6fc3f245f7b"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_19.web.webp",
+            "size": 118538,
+            "sha256": "06e54c6ea78f165a0dd7b64c4b4ffe55e9feb03cc139a937aab4a6307baba976"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_19.thumb.webp",
+            "size": 36264,
+            "sha256": "cd96f3051ed647a1874121902802c754eabeed90264469c43b5b38f48a513c2a"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_20.web.webp",
+            "size": 222398,
+            "sha256": "940708adbfcdb1fab387f99264197a8a5a515281d26e7d5c5036e54b177b55de"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_20.thumb.webp",
+            "size": 66174,
+            "sha256": "ed1f468d234a9dff70b87a4899baa6a388efcfcb55e0e5c5eb6841896c7d5ddf"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_21.web.webp",
+            "size": 128596,
+            "sha256": "14c4923330006f99a3ac30705e39fb98ff88be36aaa8e2a75823ba5a345e055c"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_21.thumb.webp",
+            "size": 37246,
+            "sha256": "cec3600e264e0a8ac8535f95962c1edd15b90a46b4ef8395b15c3d1c33a024ce"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_22.web.webp",
+            "size": 125206,
+            "sha256": "57de69c8d7ada54214250720b6188f106fee5c96a40eb115923400cc7596b04d"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_22.thumb.webp",
+            "size": 34870,
+            "sha256": "187c9f3a2b2e4a03b42e3f84934fffc1d85411f38fcbcc634453f1b657262bcd"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_23.web.webp",
+            "size": 153940,
+            "sha256": "e58b4d98f3e4f87332682b7376c30ffab2f585c7206c4a616be5a5b219516935"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_23.thumb.webp",
+            "size": 44936,
+            "sha256": "7ce0af64a20f97b776c48a80cb97ba0790c65b1daa925e36065853222a579996"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_24.web.webp",
+            "size": 277932,
+            "sha256": "75adc3e8fbeeb94ceeb705765d038c1832add6d44edc616e78c7510fa7e50901"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_24.thumb.webp",
+            "size": 73820,
+            "sha256": "b047e57d4b0b38e0c57efc9ae5517b7e309d69ad33c29188a450a1349b0d9bbb"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_25.web.webp",
+            "size": 169644,
+            "sha256": "7380ddde4e9f083ceb213cd76af9c9c0240bfc932886be848b50e958aa3ff9d6"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_25.thumb.webp",
+            "size": 50566,
+            "sha256": "19e14ff1d6e7a9aafa049e57663c9923aa55e58df68c727743c1d537228b5789"
+          }
+        },
+        {
+          "web": {
+            "name": "快樂公司_第2話_page_26.web.webp",
+            "size": 129364,
+            "sha256": "1759023a1d3037c26f8a4098a3658a53ebec9ee1877dc66b66869a02b9155aa0"
+          },
+          "thumb": {
+            "name": "快樂公司_第2話_page_26.thumb.webp",
+            "size": 37844,
+            "sha256": "39ff8126010fbef8a51356c9ebf7f2dd5485ec4bdf9549f15ae2abf0784e1a8d"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "襖致視角ㄌㄅ",
+      "title": "「驚喜！」",
+      "date": "2025-11-20",
+      "tags": [
+        "原創",
+        "ㄌㄅ"
+      ],
+      "description": "",
+      "files": {
+        "web": {
+          "name": "襖致視角ㄌㄅ.web.webp",
+          "size": 129560,
+          "sha256": "606a67aa954705aa0d80516f26cd23d3630c91589810653b0442fdd264886f97"
+        },
+        "thumb": {
+          "name": "襖致視角ㄌㄅ.thumb.webp",
+          "size": 22314,
+          "sha256": "926101bf1b0089a7db1ba0b029b9ae5e6e587cd531477fc8bc66a70f4f657d4a"
+        }
+      }
+    }
+  ],
+  "updated_at_utc": "2025-11-27T16:24:23.018223+00:00",
+  "site": {
+    "generated_at_utc": "2025-11-27T07:30:59.997943+00:00",
+    "version": 27
+  },
+  "source_hashes": {
+    "c4617a7a": "c4617a7adc5c746509d501878bfbac53595c8e08d90e734574a874d4314c39d7",
+    "99ef2aa6": "99ef2aa6d808aea48be903a8a063aa47df469670707ce005cd2c4e4bc9e9944d",
+    "e4865fb8": "e4865fb87437cc6b0dcec94f442a7841e719d8a145997b71a839b1e0972b077e",
+    "86c38122": "86c381224bac23fc7b569074b267e0e48cb90fab31ccb586a6d6063776222481",
+    "ca3dbdbc": "ca3dbdbc83bcc3e38159c50ebcf6dc817e565501670c30f076addac5bfafe7c0",
+    "6775e8f4": "6775e8f4c24b865d2317d3f54e86ba05abe8a4f0cabc78b28b46cc57cfb37574",
+    "696719e1": "696719e1984d0ec34283b9c87ba3028cbb67cde8e25289bfb7a8306c0720f221",
+    "83200d2b": "83200d2be36459f81014c58c53a2a4ef15d8003f98fa90a7d5fb7ca1ee46c739",
+    "52f60716": "52f60716272a0fb46c318011672b5eeb813ca8110a48ac6ac6b6c240ef686cbe",
+    "ab86dc3f": "ab86dc3f216e753691af02dc6eb427290214524c96facffc6ba3bdd473951fae",
+    "9636dd2a": "9636dd2acb8c368509dd3bff95ee31b1e8afb370154ed57324db3214cf0ae547",
+    "328614ab": "328614abc4d5db52edfcc2355d1a7ad93530aa2d646c586a829e78a8642d144f",
+    "05a88631": "05a88631099e2c69c26d09dc2851ffd71dec0a6d3fe6ac62f971a3fbcb58813b",
+    "e9047ac1": "e9047ac1783769f56bd0f33461492e303c579763c02111dd774abe108d8dfbf8",
+    "f8dd185f": "f8dd185f2d8991fd30a85f5f739e699a69ecb3d67644390617a66e2fc24420c8",
+    "dc4ac2c1": "dc4ac2c167cc383c626aba1d10e686f9cdcefd014776aa3a3fb3790a73e38ef3",
+    "575dce1e": "575dce1eddc9c29f319d894b5eeb3bf49c1860482d7283e8f339f71d984dcde1",
+    "1b3a0b16": "1b3a0b16f80a9e9c8a00d42499500315be94ad93313b8f36e6d61ab9be17cf46",
+    "0f87d3d9": "0f87d3d9d72d7d2f9408f6219cc6d556465f24a31eaa2fa14a840dbc72656738",
+    "f1e2f823": "f1e2f82389dc8203fa4e701a36e8cbabbfb9d23cae4227d18a0ddbc5c15fb8df",
+    "4d3f829e": "4d3f829ef0becdb4f235639dd6939efcf7b07f4000b5e3b37da0c515c4850b94",
+    "cca757b4": "cca757b46ae254aeb1d445028c879bbb27fd55048a6572720a5cb7d46d9f975b",
+    "25bde861": "25bde8619aaabfb380a1aafed6f94e8596476aa58a1fdb6d23b0206b152ad1cf",
+    "4608851a": "4608851a8f34f70547a7c4d4b9af126ad3d6cb1f36850659d6f375e465311cbc",
+    "52057836": "520578367eaf4aae699a66e0ceb55581ed3506e4a7bc7aaec74274a9a5ca9d01",
+    "a468acb3": "a468acb342ba80e452121d92519cedce0e1bc8943855e5c0e19986bad258d704",
+    "ee1b6081": "ee1b6081a38551449647cbd1359654a1afb54d12889e8d836ab1ef0573e1c9b4",
+    "bbc1fabf": "bbc1fabf0aafb506b35f90e0e19ccf9756ac17f661e280655ca50db40cafbce1",
+    "7cd42bc6": "7cd42bc687defc5ec646d7ad4e04dfc326a3dd03e10a9de36b1350972b0b820d",
+    "3b764e93": "3b764e9398115429e66ef49c0576263448282ea630cc98e5d960c949a6ae7f64"
+  }
+}

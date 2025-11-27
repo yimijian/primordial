@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>作品展示</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f5f5f7;
+    --bg-elevated: #ffffff;
+    --bg-elevated-soft: #f3f4f8;
+    --accent: #2b6cb0;
+    --accent-soft: rgba(43, 108, 176, 0.12);
+    --text-main: #1a1a1a;
+    --text-muted: #6b7280;
+    --danger: #d64545;
+    --border-subtle: #e5e7f0;
+    --radius-lg: 18px;
+    --radius-sm: 10px;
+    --shadow-soft: 0 10px 28px rgba(15, 23, 42, 0.08);
+    --transition-fast: 0.18s ease-out;
+    --transition-med: 0.22s ease-out;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 1200px;
+    padding: 18px 14px 40px;
+  }
+
+  header {
+    margin-bottom: 12px;
+  }
+
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+  }
+
+  header p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  #status {
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--danger);
+  }
+
+  .layout {
+    margin-top: 16px;
+  }
+
+  /* --- Gallery 網格（佔滿頁面寬度） --- */
+
+  .panel {
+    background: var(--bg-elevated);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-subtle);
+    padding: 14px 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+
+  .panel-header h2 {
+    margin: 0;
+    font-size: 0.96rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #111827;
+  }
+
+  .panel-header span {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+  }
+.filter-bar {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-pill {
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: #f9fafb;
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.filter-pill:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: rgba(43, 108, 176, 0.4);
+  transform: translateY(-1px);
+}
+
+.filter-pill.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  @media (min-width: 700px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+  }
+
+  .art-card {
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast),
+      background var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .art-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
+    border-color: var(--accent);
+    background: #ffffff;
+  }
+
+  .art-thumb-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 62%;
+    border-bottom: 1px solid var(--border-subtle);
+    overflow: hidden;
+    background: #f3f4f6;
+  }
+
+  .art-thumb-wrap img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease-out, opacity 0.3s ease-out;
+    transform-origin: center;
+  }
+
+  .art-card:hover .art-thumb-wrap img {
+    transform: scale(1.06);
+    opacity: 0.96;
+  }
+
+  .art-meta {
+    padding: 7px 9px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .art-title {
+    font-size: 0.86rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #111827;
+  }
+
+  .art-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .tag-pill {
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid rgba(43, 108, 176, 0.4);
+  }
+
+  .art-date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- Viewer Overlay --- */
+
+  .viewer-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: none;
+    padding: 24px 12px;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .viewer-panel.open {
+    display: flex;
+  }
+
+  .viewer-inner {
+    width: 100%;
+    max-width: 960px;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    background: var(--bg-elevated);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-subtle);
+    padding: 14px 14px 16px;
+    position: relative;
+  }
+
+  .viewer-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: #f3f4f6;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+    z-index: 5; /* 關閉鈕永遠壓在最前面 */
+  }
+
+  .viewer-close-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+    transform: translateY(-1px);
+  }
+  .viewer-fullscreen-btn {
+    position: absolute;
+    top: 10px;
+    right: 44px; /* 在關閉鍵的左邊一點 */
+    background: #f3f4f6;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: background var(--transition-fast),
+      transform var(--transition-fast),
+      color var(--transition-fast);
+    z-index: 5; /* 壓在最上層，避免被圖蓋住 */
+  }
+
+  .viewer-fullscreen-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+    transform: translateY(-1px);
+  }
+
+  .viewer-empty {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 40px 10px;
+  }
+  /* 圖片全螢幕模式：只放大圖片，隱藏 meta + 留言 */
+.viewer-panel.fullscreen {
+  padding: 0;
+}
+
+.viewer-panel.fullscreen .viewer-inner {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 只用 viewer-main + 圖片區，占滿整個視窗 */
+.viewer-panel.fullscreen .viewer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* 圖片容器變成真正的「全視窗」畫面 */
+.viewer-panel.fullscreen .viewer-image-wrap {
+  width: 100%;
+  height: 100vh;       /* 直接吃滿整個視窗高度 */
+  padding-top: 0;      /* 取消原本的 62% 比例 */
+  border-radius: 0;
+  border: none;
+  background: #000;    /* 全螢幕時圖片背景改黑，閱讀更舒服 */
+}
+
+/* 圖片本身維持 contain，避免變形 */
+.viewer-panel.fullscreen .viewer-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 全螢幕時隱藏標題 / tags / 日期 / 檔案大小 / 留言區 */
+.viewer-panel.fullscreen .viewer-meta,
+.viewer-panel.fullscreen .comments-block,
+.viewer-panel.fullscreen hr.soft {
+  display: none;
+}
+
+
+  .viewer-main {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+  }
+
+  .viewer-main.active {
+    display: flex;
+  }
+
+  .viewer-image-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 62%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f5f5f7;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .viewer-image-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #f5f5f7;
+  z-index: 1;  /* 圖片層級：1 */
+}
+
+.viewer-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(15, 23, 42, 0.35);
+  color: #ffffff;
+  display: none; /* 預設隱藏 */
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background var(--transition-fast),
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
+  z-index: 2; /* 箭頭層級：比圖片高 */
+}
+
+/* 有 is-visible 時才顯示 */
+.viewer-nav-btn.is-visible {
+  display: flex;
+}
+
+
+  .viewer-nav-btn:hover {
+    background: rgba(15, 23, 42, 0.55);
+    transform: translateY(-50%) scale(1.03);
+  }
+
+  .viewer-nav-prev {
+    left: 8px;
+  }
+
+  .viewer-nav-next {
+    right: 8px;
+  }
+
+  .viewer-page-indicator {
+    margin-top: 4px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .viewer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px 2px;
+  }
+
+  .viewer-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .viewer-title-row h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #111827;
+  }
+
+  .viewer-slug {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+  }
+
+  .viewer-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 0.72rem;
+  }
+
+  .viewer-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .viewer-meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+  }
+
+  .viewer-meta-row span {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .soft {
+    border: 0;
+    height: 1px;
+    margin: 10px 0 6px;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0,
+      rgba(15, 23, 42, 0.14) 25%,
+      rgba(15, 23, 42, 0.14) 75%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    opacity: 0.35;
+  }
+
+  .comments-block {
+    font-size: 0.8rem;
+    padding-bottom: 4px;
+  }
+
+  .comments-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+
+  .comments-header-row h4 {
+    margin: 0;
+    font-size: 0.86rem;
+    color: #111827;
+  }
+
+  .comments-count {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .comment-list {
+    border-radius: var(--radius-sm);
+    background: #fafafa;
+    border: 1px solid var(--border-subtle);
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 4px 0;
+    margin-bottom: 8px;
+  }
+
+  .comment-empty {
+    padding: 18px 12px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .comment-item {
+    padding: 8px 10px 7px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.78rem;
+  }
+
+  .comment-item:last-child {
+    border-bottom: none;
+  }
+
+  .comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .comment-author {
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: #111827;
+  }
+
+  .comment-date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .comment-body {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #111827;
+    white-space: pre-wrap;
+  }
+
+  .comment-ip {
+    margin-top: 2px;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .comment-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .comment-row input {
+    flex: 1;
+  }
+
+  .comment-form input,
+  .comment-form textarea {
+    width: 100%;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    background: #ffffff;
+    color: var(--text-main);
+    padding: 7px 11px;
+    font-size: 0.8rem;
+    outline: none;
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      background var(--transition-fast);
+  }
+
+  .comment-form textarea {
+    border-radius: 14px;
+    line-height: 1.5;
+  }
+
+  .comment-form input::placeholder,
+  .comment-form textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .comment-form input:focus,
+  .comment-form textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(43, 108, 176, 0.4);
+    background: #ffffff;
+  }
+
+  .comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .comment-status {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .btn {
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #ffffff;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 11px 22px rgba(43, 108, 176, 0.35);
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      filter var(--transition-fast),
+      background var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(43, 108, 176, 0.45);
+    filter: brightness(1.05);
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  @media (max-width: 600px) {
+    .viewer-inner {
+      padding: 10px 10px 14px;
+    }
+
+    .viewer-image-wrap {
+      border-radius: 12px;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>作品展示</h1>
+      
+      <div id="status"></div>
+    </header>
+
+    <div class="layout">
+      <!-- 作品網格 -->
+      <section class="panel">
+        <div class="panel-header">
+          <div id="filter-bar" class="filter-bar"></div>
+
+          <h2>GALLERY</h2>
+          <span id="gallery-count">0 件作品</span>
+        </div>
+        <div id="gallery" class="gallery-grid"></div>
+      </section>
+
+       <!--Overlay 檢視器 -->
+      <section class="viewer-panel" id="viewer-panel">
+        <div class="viewer-inner">
+          <button type="button" class="viewer-close-btn" id="viewer-close" aria-label="關閉檢視">×</button>
+
+          <!-- 新增：全螢幕切換按鈕 -->
+    <button
+      type="button"
+      class="viewer-fullscreen-btn"
+      id="viewer-fullscreen"
+      aria-label="切換全螢幕檢視"
+      title="切換全螢幕檢視"
+    >
+      ⛶
+    </button>
+
+          <div id="viewer-empty" class="viewer-empty">
+            尚未選擇作品，請點選下方任一作品卡片檢視大圖與留言。
+          </div>
+
+          <div id="viewer-main" class="viewer-main">
+            <div class="viewer-image-wrap">
+    <button
+      type="button"
+      class="viewer-nav-btn viewer-nav-prev"
+      id="viewer-prev"
+      aria-label="上一張"
+    >
+      ‹
+    </button>
+
+    <img id="viewer-image" alt="" />
+
+    <button
+      type="button"
+      class="viewer-nav-btn viewer-nav-next"
+      id="viewer-next"
+      aria-label="下一張"
+    >
+      ›
+    </button>
+  </div>
+
+  <!-- 顯示「1 / 5」這種頁數 -->
+  <div class="viewer-page-indicator" id="viewer-page-indicator"></div>
+
+            <div class="viewer-meta">
+              <div class="viewer-title-row">
+                <h3 id="viewer-title"></h3>
+                <span id="viewer-slug" class="viewer-slug"></span>
+              </div>
+              <div class="viewer-tags" id="viewer-tags"></div>
+              <p class="viewer-desc" id="viewer-desc"></p>
+              <div class="viewer-meta-row">
+  <span id="viewer-date"></span>
+  <span id="viewer-size"></span>
+  <span id="viewer-page-info"></span> <!-- 新增：顯示 1 / 27 之類 -->
+</div>
+
+            </div>
+
+            <hr class="soft" />
+
+            <div class="comments-block">
+              <div class="comments-header-row">
+                <h4>留言</h4>
+                <span class="comments-count" id="comments-count"></span>
+              </div>
+              <div id="comments-list" class="comment-list">
+                <div class="comment-empty">尚未選擇作品。</div>
+              </div>
+
+              <form id="comment-form" class="comment-form">
+                <div class="comment-row">
+                  <input
+                    type="text"
+                    id="comment-name"
+                    maxlength="20"
+                    placeholder="暱稱（必填）"
+                  />
+                </div>
+                <textarea
+                  id="comment-message"
+                  maxlength="500"
+                  placeholder="想對這張圖說些什麼？（必填）"
+                ></textarea>
+                <div class="comment-actions">
+                  <div class="comment-status" id="comment-status">
+                    留言會記錄基礎資訊以防範惡意行為。
+                  </div>
+                  <button type="submit" class="btn" id="comment-submit">
+                    送出留言
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // === 基本設定 ===
+    let lastCommentSentAt = 0;
+    let lastCommentKey = '';
+
+    const MANIFEST_URL = "manifest.json";
+
+    // Cloudflare Worker proxy 到 GAS
+    const COMMENT_API_BASE = "https://art-gas-proxy.meammy84124.workers.dev/";
+
+    // === 狀態 ===
+    let allArtworks = [];
+    let currentArtwork = null;
+    let viewerFullscreen = false;
+    let isSubmittingComment = false;
+
+    const statusEl = document.getElementById("status");
+    const galleryEl = document.getElementById("gallery");
+    const galleryCountEl = document.getElementById("gallery-count");
+
+    const viewerPanelEl = document.getElementById("viewer-panel");
+    const viewerEmptyEl = document.getElementById("viewer-empty");
+    const viewerMainEl = document.getElementById("viewer-main");
+    const viewerImg = document.getElementById("viewer-image");
+    const viewerPrevBtn = document.getElementById("viewer-prev");
+    const viewerNextBtn = document.getElementById("viewer-next");
+    const viewerPageIndicatorEl = document.getElementById("viewer-page-indicator");
+
+    // 組圖 / 漫畫用的狀態
+    let currentPages = null;     // 陣列：這個作品的所有頁
+    let currentPageIndex = 0;    // 現在看到第幾張
+
+    const viewerCloseBtn = document.getElementById("viewer-close");
+    const viewerFullBtn = document.getElementById("viewer-fullscreen");
+    const viewerTitleEl = document.getElementById("viewer-title");
+    const viewerSlugEl = document.getElementById("viewer-slug");
+    const viewerTagsEl = document.getElementById("viewer-tags");
+    const viewerDescEl = document.getElementById("viewer-desc");
+    const viewerDateEl = document.getElementById("viewer-date");
+    const viewerSizeEl = document.getElementById("viewer-size");
+
+    const commentsListEl = document.getElementById("comments-list");
+    const commentsCountEl = document.getElementById("comments-count");
+    const commentFormEl = document.getElementById("comment-form");
+    const commentNameEl = document.getElementById("comment-name");
+    const commentMessageEl = document.getElementById("comment-message");
+    const commentStatusEl = document.getElementById("comment-status");
+    const commentSubmitBtn = document.getElementById("comment-submit");
+function buildTagFilterBar(artworks) {
+  const bar = document.getElementById("filter-bar");
+  if (!bar) return;
+
+  bar.innerHTML = "";
+
+  // 「全部」按鈕
+  const allBtn = document.createElement("button");
+  allBtn.className = "filter-pill active";
+  allBtn.dataset.tag = "";
+  allBtn.textContent = "全部";
+  bar.appendChild(allBtn);
+
+  // 收集所有 tag
+  const tagSet = new Set();
+  artworks.forEach((art) => {
+    if (Array.isArray(art.tags)) {
+      art.tags.forEach((t) => {
+        if (t) tagSet.add(t);
+      });
+    }
+  });
+
+  const tags = Array.from(tagSet).sort((a, b) => a.localeCompare(b, "zh-Hant"));
+
+  // 建立 tag 按鈕
+  tags.forEach((tag) => {
+    const btn = document.createElement("button");
+    btn.className = "filter-pill";
+    btn.dataset.tag = tag;
+    btn.textContent = tag;
+    bar.appendChild(btn);
+  });
+
+  // 點擊事件
+  bar.addEventListener("click", (evt) => {
+    const btn = evt.target.closest("button.filter-pill");
+    if (!btn) return;
+
+    const tag = btn.dataset.tag || null;
+    currentTagFilter = tag || null;
+
+    bar.querySelectorAll("button.filter-pill").forEach((b) => {
+      b.classList.toggle("active", b === btn);
+    });
+
+    applyFiltersAndRender();
+  });
+}
+
+// 依完成時間排序（新 → 舊）
+function compareArtByDateDesc(a, b) {
+  const da = a.date || "";
+  const db = b.date || "";
+
+  if (da && db && da !== db) {
+    return db.localeCompare(da);  // ISO 日期字串可以直接比較
+  }
+
+  // 萬一日期相同，用 slug 當次排序避免順序跳動
+  const sa = (a.slug || a.title || "").toString();
+  const sb = (b.slug || b.title || "").toString();
+  return sa.localeCompare(sb);
+}
+
+let currentTagFilter = null; // 目前選到哪個 tag（null = 全部）
+
+function applyFiltersAndRender() {
+  // 1) 複製
+  let list = allArtworks.slice();
+
+  // 2) 排序（依 date 新 → 舊）
+  list.sort(compareArtByDateDesc);
+
+  // 3) 如果有 tag 就做篩選
+  if (currentTagFilter) {
+    list = list.filter((art) =>
+      Array.isArray(art.tags) && art.tags.includes(currentTagFilter)
+    );
+  }
+
+  // 4) render
+  renderGallery(list);
+  galleryCountEl.textContent = `${list.length} 件作品`;
+}
+
+
+    function hasCommentApi() {
+      return COMMENT_API_BASE && COMMENT_API_BASE.trim().length > 0;
+    }
+
+    function setStatus(msg, isError = false) {
+      statusEl.textContent = msg || "";
+      statusEl.style.color = isError ? "var(--danger)" : "var(--danger)";
+    }
+
+    // 時間格式：轉成本地時間
+    function formatDateForDisplay(raw) {
+      if (!raw) return "";
+      const d = raw instanceof Date ? raw : new Date(raw);
+      if (Number.isNaN(d.getTime())) {
+        return String(raw);
+      }
+      return d.toLocaleString(undefined, {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      });
+    }
+
+    // === 載入作品 ===
+
+    async function loadArtworks() {
+      setStatus("載入作品中…");
+
+      try {
+        const res = await fetch(MANIFEST_URL, { cache: "no-cache" });
+        if (!res.ok) {
+          throw new Error("manifest 載入失敗（HTTP " + res.status + "）");
+        }
+        const manifest = await res.json();
+        const artworks = Array.isArray(manifest.artworks)
+          ? manifest.artworks
+          : [];
+        allArtworks = artworks;
+
+// 建立分類列
+buildTagFilterBar(allArtworks);
+
+// 排序＋篩選＋render
+applyFiltersAndRender();
+
+setStatus("");
+
+      } catch (err) {
+        console.error("載入 manifest 失敗", err);
+        setStatus("載入作品失敗：" + err.message, true);
+      }
+    }
+
+    function getImageBaseUrl() {
+      const url = new URL(window.location.href);
+      url.pathname = url.pathname.replace(/[^/]+$/, "");
+      return url.toString();
+    }
+
+    function buildImageUrl(entry) {
+  if (!entry) return "";
+
+  // 1) 直接給字串：當成路徑或 URL
+  if (typeof entry === "string") {
+    return entry;
+  }
+
+  // 2) 給物件時，依序嘗試 url / path / name
+  if (typeof entry === "object") {
+    // 2-1) 完整 URL
+    if (entry.url) {
+      return String(entry.url);
+    }
+
+    // 2-2) 相對/絕對路徑
+    if (entry.path) {
+      const base = getImageBaseUrl();
+      return new URL(entry.path, base).toString();
+    }
+
+    // 2-3) 只有檔名（你現在 manifest 的情況）
+    if (entry.name) {
+      const base = getImageBaseUrl();
+      return base + encodeURIComponent(entry.name);
+    }
+  }
+
+  return "";
+}
+
+
+
+    function renderGallery(artworks) {
+      galleryEl.innerHTML = "";
+
+      if (!artworks.length) {
+        galleryEl.innerHTML =
+          '<div class="viewer-empty" style="padding:20px 6px;">目前沒有作品。</div>';
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+
+      artworks.forEach((art) => {
+        const card = document.createElement("article");
+        card.className = "art-card";
+        card.dataset.slug = art.slug || "";
+
+        const thumbWrap = document.createElement("div");
+        thumbWrap.className = "art-thumb-wrap";
+
+        const img = document.createElement("img");
+        const thumbUrl = buildImageUrl(art.files && art.files.thumb);
+        const webUrl = buildImageUrl(art.files && art.files.web);
+
+        img.src = thumbUrl || webUrl || "";
+        img.alt = art.title || art.slug || "";
+        thumbWrap.appendChild(img);
+
+        const meta = document.createElement("div");
+        meta.className = "art-meta";
+
+        const titleEl = document.createElement("div");
+        titleEl.className = "art-title";
+        titleEl.textContent = art.title || art.slug || "未命名作品";
+
+        const rowEl = document.createElement("div");
+        rowEl.className = "art-meta-row";
+
+        const firstTag =
+          Array.isArray(art.tags) && art.tags.length ? art.tags[0] : null;
+        if (firstTag) {
+  const tag = document.createElement("button");
+  tag.type = "button";
+  tag.className = "tag-pill";
+  tag.textContent = firstTag;
+
+  tag.addEventListener("click", (evt) => {
+    evt.stopPropagation(); // 不觸發卡片 click
+    const bar = document.getElementById("filter-bar");
+    if (!bar) return;
+
+    const btn = bar.querySelector(
+      `button.filter-pill[data-tag="${CSS.escape(firstTag)}"]`
+    );
+    if (btn) btn.click();
+  });
+
+  rowEl.appendChild(tag);
+} else {
+          const placeholder = document.createElement("span");
+          placeholder.style.flex = "1";
+          rowEl.appendChild(placeholder);
+        }
+
+        const dateEl = document.createElement("span");
+        dateEl.className = "art-date";
+        dateEl.textContent = art.date || "";
+        rowEl.appendChild(dateEl);
+
+        meta.appendChild(titleEl);
+        meta.appendChild(rowEl);
+
+        card.appendChild(thumbWrap);
+        card.appendChild(meta);
+
+        card.addEventListener("click", () => openViewer(art));
+
+        frag.appendChild(card);
+      });
+
+      galleryEl.appendChild(frag);
+    }
+    // 取得這個作品用來顯示的大圖列表：
+    // - 若有 art.pages 就用它
+    // - 若沒有，就用單一的 art.files.web 包成一張的陣列
+    function getPageListForArtwork(art) {
+      // 1) 有 pages：優先使用
+      if (Array.isArray(art.pages) && art.pages.length > 0) {
+        // 允許三種格式：
+        //   - "檔名字串"
+        //   - { name: "xxx.webp" }
+        //   - { web: { name: "xxx.webp", ... } }
+        return art.pages.map((p) => {
+          if (!p) return null;
+          if (typeof p === "string") return { entry: p };
+          if (p.web) return { entry: p.web };
+          return { entry: p };
+        }).filter(Boolean);
+      }
+
+      // 2) 沒有 pages：退回單張圖模式
+      if (art.files && art.files.web) {
+        return [{ entry: art.files.web }];
+      }
+
+      // 最保險 fallback
+      return [];
+    }
+
+    function updateViewerPageUI() {
+  if (!currentPages || currentPages.length === 0) {
+    // 沒有頁面：全部清空 & 隱藏
+    viewerImg.src = "";
+    viewerPageIndicatorEl.textContent = "";
+    viewerPageIndicatorEl.style.display = "none";
+
+    viewerPrevBtn.classList.remove("is-visible");
+    viewerNextBtn.classList.remove("is-visible");
+    return;
+  }
+
+  const total = currentPages.length;
+  const page = currentPages[currentPageIndex];
+  const entry = page.entry;
+
+  const url = buildImageUrl(entry);
+  viewerImg.src = url || "";
+
+  if (total > 1) {
+    // 顯示「目前頁 / 總頁數」
+    viewerPageIndicatorEl.textContent = (currentPageIndex + 1) + " / " + total;
+    viewerPageIndicatorEl.style.display = "block";
+
+    // 左右箭頭顯示條件
+    viewerPrevBtn.classList.toggle("is-visible", currentPageIndex > 0);
+    viewerNextBtn.classList.toggle("is-visible", currentPageIndex < total - 1);
+  } else {
+    // 只有一頁：不需要頁碼 / 箭頭
+    viewerPageIndicatorEl.textContent = "";
+    viewerPageIndicatorEl.style.display = "none";
+    viewerPrevBtn.classList.remove("is-visible");
+    viewerNextBtn.classList.remove("is-visible");
+  }
+}
+
+
+
+    // === 檢視器 ===
+
+    function openViewer(art) {
+      currentArtwork = art;
+
+      // 開啟檢視視窗（遮罩）
+      viewerPanelEl.classList.add("open");
+      document.body.style.overflow = "hidden";
+
+      viewerEmptyEl.style.display = "none";
+      viewerMainEl.classList.add("active");
+
+      // 把這個作品的所有頁整理成列表
+  currentPages = getPageListForArtwork(art);
+  currentPageIndex = 0;
+  viewerImg.alt = art.title || art.slug || "";
+
+  // 顯示當前頁（會自動決定要不要顯示左右箭頭）
+  updateViewerPageUI();
+
+  viewerTitleEl.textContent = art.title || "未命名作品";
+  viewerSlugEl.textContent = art.slug || "";
+
+      viewerTagsEl.innerHTML = "";
+      if (Array.isArray(art.tags) && art.tags.length) {
+        art.tags.forEach((tag) => {
+          const pill = document.createElement("span");
+          pill.className = "tag-pill";
+          pill.textContent = tag;
+          viewerTagsEl.appendChild(pill);
+        });
+      }
+
+      viewerDescEl.textContent = art.description || "";
+      viewerDateEl.textContent = art.date ? "日期：" + art.date : "";
+
+      if (
+        art.files &&
+        art.files.web &&
+        art.files.web.width &&
+        art.files.web.height
+      ) {
+        viewerSizeEl.textContent =
+          "尺寸：" + art.files.web.width + "×" + art.files.web.height;
+      } else {
+        viewerSizeEl.textContent = "";
+      }
+
+      // 清掉留言輸入
+      commentMessageEl.value = "";
+
+      // 載入留言
+      loadCommentsForCurrent();
+    }
+
+    function closeViewer() {
+      currentArtwork = null;
+      viewerPanelEl.classList.remove("open");
+      viewerPanelEl.classList.remove("fullscreen");  // ← 新增
+      document.body.style.overflow = "";
+
+      viewerFullscreen = false;                      // ← 新增：重置狀態
+
+      viewerMainEl.classList.remove("active");
+      viewerEmptyEl.style.display = "block";
+
+      commentsListEl.innerHTML =
+        '<div class="comment-empty">尚未選擇作品。</div>';
+      commentsCountEl.textContent = "";
+      setCommentStatus("留言會記錄基礎資訊以防範惡意行為。");
+    }
+
+    // === 留言 API ===
+
+    function setCommentStatus(msg, isError = false) {
+      commentStatusEl.textContent = msg || "";
+      commentStatusEl.style.color = isError
+        ? "var(--danger)"
+        : "var(--text-muted)";
+    }
+
+    async function loadCommentsForCurrent() {
+      const art = currentArtwork;
+      if (!art || !art.slug) {
+        commentsListEl.innerHTML =
+          '<div class="comment-empty">尚未選擇作品。</div>';
+        commentsCountEl.textContent = "";
+        setCommentStatus("尚未選擇作品。");
+        return;
+      }
+
+      if (!hasCommentApi()) {
+        commentsListEl.innerHTML =
+          '<div class="comment-empty">留言功能尚未設定（後端 API 未啟用）。</div>';
+        commentsCountEl.textContent = "";
+        setCommentStatus(
+          "目前僅展示作品，未啟用留言 API。日後可補上 Cloudflare Worker / GAS。"
+        );
+        return;
+      }
+
+      commentsListEl.innerHTML =
+        '<div class="comment-empty">載入留言中…</div>';
+      commentsCountEl.textContent = "";
+      setCommentStatus("");
+
+      try {
+        const url =
+          COMMENT_API_BASE +
+          "?action=getComments&slug=" +
+          encodeURIComponent(art.slug);
+
+        const res = await fetch(url, { method: "GET" });
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+        const data = await res.json();
+        const comments = Array.isArray(data.comments) ? data.comments : [];
+
+        renderComments(comments);
+        commentsCountEl.textContent = comments.length + " 則留言";
+        setCommentStatus("留言會記錄基礎資訊以防範惡意行為。");
+      } catch (err) {
+        console.error("載入留言失敗", err);
+        commentsListEl.innerHTML =
+          '<div class="comment-empty">留言載入失敗：' +
+          (err.message || "未知錯誤") +
+          "</div>";
+        commentsCountEl.textContent = "";
+        setCommentStatus("留言載入失敗。", true);
+      }
+    }
+
+    function renderComments(comments) {
+      commentsListEl.innerHTML = "";
+
+      if (!Array.isArray(comments) || comments.length === 0) {
+        commentsListEl.innerHTML =
+          '<div class="comment-empty">目前還沒有留言，來當第一個吧！</div>';
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+
+      comments.forEach((c) => {
+        const item = document.createElement("div");
+        item.className = "comment-item";
+
+        const meta = document.createElement("div");
+        meta.className = "comment-meta";
+
+        const author = document.createElement("span");
+        author.className = "comment-author";
+        let rawName =
+  c.name != null && c.name !== "" ? c.name : c.nickname;
+
+if (rawName == null) rawName = "";
+const safeName = String(rawName).trim();
+
+author.textContent = safeName || "匿名";
+
+
+        const date = document.createElement("span");
+        date.className = "comment-date";
+        const rawTime = c.createdAt || c.timestamp || "";
+        date.textContent = formatDateForDisplay(rawTime);
+
+        meta.appendChild(author);
+        meta.appendChild(date);
+
+        const body = document.createElement("div");
+        body.className = "comment-body";
+        body.textContent = c.message || c.content || "";
+
+        item.appendChild(meta);
+        item.appendChild(body);
+
+        if (c.ipMasked) {
+          const ip = document.createElement("div");
+          ip.className = "comment-ip";
+          ip.textContent = "IP： " + c.ipMasked;
+          item.appendChild(ip);
+        }
+
+        frag.appendChild(item);
+      });
+
+      commentsListEl.appendChild(frag);
+    }
+
+    async function handleCommentSubmit(evt) {
+      evt.preventDefault();
+
+      if (!currentArtwork || !currentArtwork.slug) {
+        setCommentStatus("請先選擇一張作品再留言。", true);
+        return;
+      }
+
+      if (!hasCommentApi()) {
+        setCommentStatus("留言功能尚未設定（後端 API 未啟用）。", true);
+        return;
+      }
+
+      const name = commentNameEl.value.trim();
+      const message = commentMessageEl.value.trim();
+
+      if (!name) {
+        setCommentStatus("請輸入暱稱。", true);
+        return;
+      }
+      if (!message) {
+        setCommentStatus("請輸入留言內容。", true);
+        return;
+      }
+      // === 簡單的前端防洗版 ===
+    const now = Date.now();
+    const key = currentArtwork.slug + '|' + name + '|' + message;
+
+    // 1. 10 秒內不要連續發
+    if (now - lastCommentSentAt < 10 * 1000) {
+      setCommentStatus("留言太頻繁了，請稍等幾秒再試。", true);
+      return;
+    }
+
+    // 2. 同一作品 + 同一人 + 完全一樣內容，若剛剛才送過一次，就擋掉
+    if (key === lastCommentKey) {
+      setCommentStatus("你剛剛已經送出過一樣的留言了～", true);
+      return;
+    }
+      if (isSubmittingComment) {
+        return;
+      }
+      isSubmittingComment = true;
+      commentSubmitBtn.disabled = true;
+      setCommentStatus("送出中…", false);
+
+      try {
+        const payload = {
+          slug: currentArtwork.slug,
+          name,
+          message,
+        };
+
+        const url = COMMENT_API_BASE + "?action=addComment";
+
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          let text;
+          try {
+            text = await res.text();
+          } catch (e) {
+            text = "";
+          }
+          let data;
+          try {
+            data = text ? JSON.parse(text) : null;
+          } catch (err) {
+            throw new Error(
+              "後端回傳非 JSON（HTTP " +
+                res.status +
+                "）： " +
+                text.slice(0, 120)
+            );
+          }
+          throw new Error(data && data.error ? data.error : "未知錯誤");
+        }
+
+        const data = await res.json();
+        if (!data.ok) {
+          throw new Error(data && data.error ? data.error : "未知錯誤");
+        }
+
+        commentMessageEl.value = "";
+        setCommentStatus("送出成功！", false);
+
+        lastCommentSentAt = Date.now();
+        lastCommentKey = key;
+
+        await loadCommentsForCurrent();
+
+      } catch (err) {
+        console.error("送出留言失敗", err);
+        setCommentStatus("送出留言失敗：" + err.message, true);
+      } finally {
+        isSubmittingComment = false;
+        commentSubmitBtn.disabled = false;
+      }
+    }
+
+    // === 檢視視窗事件 ===
+    if (viewerCloseBtn) {
+      viewerCloseBtn.addEventListener("click", () => {
+        closeViewer();
+      });
+    }
+
+    if (viewerFullBtn) {
+      viewerFullBtn.addEventListener("click", () => {
+        viewerFullscreen = !viewerFullscreen;
+        if (viewerFullscreen) {
+          viewerPanelEl.classList.add("fullscreen");
+          viewerFullBtn.textContent = "🗗";  // 退出全螢幕的 icon
+        } else {
+          viewerPanelEl.classList.remove("fullscreen");
+          viewerFullBtn.textContent = "⛶";  // 進入全螢幕的 icon
+        }
+      });
+    }
+
+
+    if (viewerPanelEl) {
+      viewerPanelEl.addEventListener("click", (evt) => {
+        if (evt.target === viewerPanelEl) {
+          closeViewer();
+        }
+      });
+    }
+
+    window.addEventListener("keydown", (evt) => {
+      if (
+        evt.key === "Escape" &&
+        viewerPanelEl &&
+        viewerPanelEl.classList.contains("open")
+      ) {
+        closeViewer();
+      }
+    });
+    if (viewerPrevBtn) {
+      viewerPrevBtn.addEventListener("click", () => {
+        if (!currentPages || currentPages.length <= 1) return;
+        if (currentPageIndex > 0) {
+          currentPageIndex -= 1;
+          updateViewerPageUI();
+        }
+      });
+    }
+
+    if (viewerNextBtn) {
+      viewerNextBtn.addEventListener("click", () => {
+        if (!currentPages || currentPages.length <= 1) return;
+        if (currentPageIndex < currentPages.length - 1) {
+          currentPageIndex += 1;
+          updateViewerPageUI();
+        }
+      });
+    }
+
+    // === 啟動 ===
+
+    commentFormEl.addEventListener("submit", handleCommentSubmit);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadArtworks();
+    });
+  </script>
+</body>
+</html>
